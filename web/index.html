@@ -1,0 +1,76 @@
+<html><head><base href="." />
+<meta charset="utf-8">
+<title>Chat GPT</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="chat-container" id="chatContainer">
+    <div class="message bot-message">
+      Привет! Я AI ассистент. Как я могу помочь вам сегодня?
+    </div>
+  </div>
+  
+  <div id="filePreviewArea" class="file-preview-area" style="display: none;">
+    <div class="file-preview">
+      <div>
+        <button class="file-preview-close" onclick="clearFilePreview()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="file-message">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+            <polyline points="13 2 13 9 20 9"></polyline>
+          </svg>
+          <span>${file.name} (${fileExt.toUpperCase()})</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <textarea 
+      id="userInput" 
+      placeholder="Напишите сообщение..."
+      rows="1"
+      maxlength="3000"
+      autocomplete="off"
+    ></textarea>
+    <div class="char-count"><span id="charCount">0</span>/3000</div>
+    <div class="input-buttons">
+      <button id="fileButton" class="file-button" title="Загрузить файл">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+          <polyline points="13 2 13 9 20 9"></polyline>
+        </svg>
+        <input type="file" id="fileInput" accept=".txt,.md,.json,.csv,.xml,.html,.css,.js,.py,.java,.cpp,.c,.rb,.php,.sql" style="display: none;">
+      </button>
+      <button id="micButton" class="mic-button" title="Голосовой ввод">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="23"></line>
+          <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+      </button>
+      <button id="sendButton">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/eel.js"></script>
+<script src="./src/script.js">
+</script>
+</body>
+</html>

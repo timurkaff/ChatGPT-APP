@@ -1,0 +1,356 @@
+:root {
+    --primary: #10a37f;
+    --bg: #343541;
+    --chat-bg: #444654;
+    --text: #ececf1;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--bg);
+  }
+  
+  /* Custom scrollbar styling */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: var(--bg);
+    border-radius: 4px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background: #0d8c6c;
+  }
+  
+  body {
+    font-family: 'Comfortaa', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-container {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .message {
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    animation: fadeIn 0.3s ease-in;
+    position: relative;
+  }
+  
+  .message code {
+    background: rgba(0,0,0,0.2);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+  
+  .message pre {
+    background: rgba(0,0,0,0.2);
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1em 0;
+    position: relative;
+  }
+  
+  .message pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+  
+  .code-copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+  }
+  
+  .code-copy-button svg {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .message pre:hover .code-copy-button {
+    opacity: 1;
+  }
+  
+  .code-copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .user-message {
+    background: var(--bg);
+  }
+  
+  .bot-message {
+    background: var(--chat-bg);
+  }
+  
+  .message-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .message:hover .message-actions {
+    opacity: 1;
+  }
+  
+  .action-button {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 0.25rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .action-button:hover {
+    opacity: 1;
+  }
+  
+  .action-button svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .input-container {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  textarea {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--text);
+    font-size: 1rem;
+    resize: none;
+    height: 60px;
+    max-height: 200px;
+    transition: all 0.3s ease;
+    font-family: 'Comfortaa', sans-serif;
+  }
+  
+  textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  
+  .input-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  button {
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  button:hover {
+    background: rgba(16, 163, 127, 0.1);
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  button svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .char-count {
+    position: absolute;
+    bottom: -1.5rem;
+    right: 0;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+  
+  .mic-button {
+    background: transparent;
+    border: 1px solid var(--primary);
+  }
+  
+  .mic-button.active {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .file-button {
+    background: transparent;
+    border: 1px solid var(--primary);
+  }
+  
+  .file-message {
+    display: inline-flex; /* Change to inline-flex */
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 163, 127, 0.1);
+    padding: 0.4rem 0.8rem; /* Smaller padding */
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    font-size: 0.9rem; /* Smaller font */
+    max-width: fit-content; /* Limit width to content */
+  }
+  
+  .file-preview-area {
+    margin-top: 1rem;
+    border-top: 1px solid rgba(16, 163, 127, 0.2);
+    padding-top: 1rem;
+  }
+  
+  .file-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative; /* Add this */
+    margin-bottom: 15px;
+  }
+  
+  .file-preview-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .file-message svg {
+    height: 30px;
+  }
+  
+  .file-preview > div {
+    position: relative;
+    padding-right: 30px;
+  }
+  
+  .file-preview .file-message {
+    margin: 0;
+  }
+  
+  .file-content {
+    background: rgba(16, 163, 127, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .file-content pre {
+    margin: 0;
+  }
+  
+  .file-preview-close:hover {
+    opacity: 1;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .typing-indicator {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--chat-bg);
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    animation: fadeIn 0.3s ease-in;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--text);
+    border-radius: 50%;
+    animation: bounce 1.5s infinite;
+  }
+  
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-4px); }
+  }
